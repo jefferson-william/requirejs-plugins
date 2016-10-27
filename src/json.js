@@ -30,17 +30,11 @@ define(['text'], function(text){
                 onLoad(null);
             } else {
                 text.get(req.toUrl(name), function(data){
-                    var parsed;
                     if (config.isBuild) {
                         buildMap[name] = data;
                         onLoad(data);
                     } else {
-                        try {
-                            parsed = jsonParse(data);
-                        } catch (e) {
-                            onLoad.error(e);
-                        }
-                        onLoad(parsed);
+                        onLoad(jsonParse(data));
                     }
                 },
                     onLoad.error, {
